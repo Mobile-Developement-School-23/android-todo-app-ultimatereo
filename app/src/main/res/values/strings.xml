@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">android-todo-app-ultimatereo</string>
+    <string name="myToDo">Мои дела</string>
 </resources>

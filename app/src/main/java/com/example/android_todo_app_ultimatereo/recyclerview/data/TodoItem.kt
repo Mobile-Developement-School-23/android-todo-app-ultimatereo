@@ -5,13 +5,13 @@ import java.sql.Timestamp
 data class TodoItem (
     val id : String,
     val text : String,
-    val importance : TodoPriority = TodoPriority.NO,
+    val importance : TodoPriority?,
     val deadline : Timestamp?,
     val isDone : Boolean,
-    val timeOfCreation : Timestamp,
-    val timeOfLastChange : Timestamp
+    val timeOfCreation : Timestamp, // TODO: DateTime, Date
+    val timeOfLastChange : Timestamp?
     )
 
 enum class TodoPriority {
-    NO, LOW, MEDIUM, HIGH
+    LOW, MEDIUM, HIGH
 }

@@ -1,15 +1,15 @@
 package com.example.android_todo_app_ultimatereo.recyclerview.data
 
-import java.sql.Timestamp
+import java.util.Date
 
 data class TodoItem (
     val id : String,
     val text : String,
-    val importance : TodoPriority?,
-    val deadline : Timestamp?,
+    val priority : TodoPriority?,
+    val deadline : Date?,
     val isDone : Boolean,
-    val timeOfCreation : Timestamp, // TODO: DateTime, Date
-    val timeOfLastChange : Timestamp?
+    val timeOfCreation : Date,
+    val timeOfLastChange : Date?
     )
 
 enum class TodoPriority {

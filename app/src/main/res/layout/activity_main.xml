@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@id/title">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/chats"
+            android:id="@+id/todo_items"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

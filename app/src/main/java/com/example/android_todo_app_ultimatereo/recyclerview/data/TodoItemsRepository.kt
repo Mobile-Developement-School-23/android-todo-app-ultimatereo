@@ -9,7 +9,14 @@ class TodoItemsRepository {
     }
     private val todoItems : MutableList<TodoItem>
     init {
-        todoItems = buildList {
+        todoItems = generateList()
+    }
+    fun getTodoItems() : List<TodoItem> {
+        return generateList()
+    }
+
+    private fun generateList() : MutableList<TodoItem> {
+        return buildList {
             val numberOfItems = (10..30).random()
             for (i in 0 until numberOfItems) {
                 val id = "TodoItem_$i"
@@ -23,9 +30,6 @@ class TodoItemsRepository {
                 add(todoItem)
             }
         }.toMutableList()
-    }
-    fun getTodoItems() : List<TodoItem> {
-        return todoItems
     }
     private fun getRandomString(length: Int) : String {
         val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')

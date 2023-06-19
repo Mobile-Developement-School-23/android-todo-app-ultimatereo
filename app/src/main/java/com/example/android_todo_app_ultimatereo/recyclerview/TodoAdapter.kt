@@ -1,5 +1,6 @@
 package com.example.android_todo_app_ultimatereo.recyclerview
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,7 +9,7 @@ import com.example.android_todo_app_ultimatereo.R
 import com.example.android_todo_app_ultimatereo.recyclerview.data.TodoItem
 import com.example.android_todo_app_ultimatereo.recyclerview.domain.CommonCallbackImpl
 
-class TodoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TodoAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var todoItems = listOf<TodoItem>()
         set(value) {
@@ -23,7 +24,7 @@ class TodoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return TodoItemHolder(layoutInflater.inflate(R.layout.todo_item, parent, false))
+        return TodoItemHolder(context, layoutInflater.inflate(R.layout.todo_item, parent, false))
     }
 
     override fun getItemCount(): Int = todoItems.size

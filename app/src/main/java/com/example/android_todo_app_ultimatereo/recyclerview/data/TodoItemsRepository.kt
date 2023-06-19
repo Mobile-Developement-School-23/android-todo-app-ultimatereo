@@ -12,7 +12,7 @@ class TodoItemsRepository {
         todoItems = generateList()
     }
     fun getTodoItems() : List<TodoItem> {
-        return generateList()
+        return todoItems
     }
 
     private fun generateList() : MutableList<TodoItem> {

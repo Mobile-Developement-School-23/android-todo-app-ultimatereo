@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         todoRecyclerView = findViewById(R.id.todo_items)
-        val todoAdapter = TodoAdapter()
+        val todoAdapter = TodoAdapter(this)
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         todoRecyclerView.adapter = todoAdapter
         todoRecyclerView.layoutManager = layoutManager

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
+
     <style name="Theme.ToDoApp" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="support_separator">@color/support_light_separator</item>
@@ -18,6 +19,7 @@
         <item name="back_secondary">@color/back_light_secondary</item>
         <item name="back_elevated">@color/back_light_elevated</item>
     </style>
+
     <style name="checkBoxStyle" parent="Theme.AppCompat">
         <item name="colorAccent">@color/color_light_green</item>
         <item name="android:textColorSecondary">@color/support_light_separator</item>

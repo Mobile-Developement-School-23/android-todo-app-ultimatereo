@@ -16,12 +16,13 @@ class TodoAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerV
             val callback = CommonCallbackImpl(
                 oldItems = field,
                 newItems = value,
-                {oldItem : TodoItem, newItem ->  oldItem.id == newItem.id}
+                { oldItem: TodoItem, newItem -> oldItem.id == newItem.id }
             )
             field = value
             val diffResult = DiffUtil.calculateDiff(callback)
             diffResult.dispatchUpdatesTo(this)
         }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return TodoItemHolder(context, layoutInflater.inflate(R.layout.todo_item, parent, false))

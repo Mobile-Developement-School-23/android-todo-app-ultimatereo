@@ -10,8 +10,8 @@ import com.example.android_todo_app_ultimatereo.recyclerview.TodoAdapter
 import com.example.android_todo_app_ultimatereo.recyclerview.data.TodoItemsRepository
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var todoRecyclerView : RecyclerView
-    private lateinit var doneTextView : TextView
+    private lateinit var todoRecyclerView: RecyclerView
+    private lateinit var doneTextView: TextView
     private val todoItemsRepository = TodoItemsRepository()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         doneTextView = findViewById(R.id.done)
         doneTextView.text = "${todoItemsRepository.getTodoItems().count { td -> td.isDone }}"
 //        TODO : Сделать так, чтобы счётчик обновлялся не только при обновлении страницы!
-        val pullToRefresh : SwipeRefreshLayout = findViewById(R.id.pull_to_refresh)
+        val pullToRefresh: SwipeRefreshLayout = findViewById(R.id.pull_to_refresh)
         pullToRefresh.setOnRefreshListener {
             todoAdapter.todoItems = todoItemsRepository.getTodoItems()
             pullToRefresh.isRefreshing = false

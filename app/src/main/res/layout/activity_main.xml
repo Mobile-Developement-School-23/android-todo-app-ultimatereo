@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="?attr/back_primary"
-    >
+    android:background="?attr/back_primary">
 
     <TextView
         android:id="@+id/title"
@@ -22,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--TODO: Сделать плюсик, чтобы добавлять новые записи -->
+    <!--TODO: Сделать плюсик, чтобы добавлять новые записи -->
 
     <TextView
         android:id="@+id/doneSample"
@@ -30,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="6dp"
-        android:text = "@string/done"
+        android:text="@string/done"
         android:textColor="?attr/label_tertiary"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -57,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:importantForAccessibility="no"
-        android:backgroundTint="?attr/back_primary"/>
+        android:backgroundTint="?attr/back_primary" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/pull_to_refresh"

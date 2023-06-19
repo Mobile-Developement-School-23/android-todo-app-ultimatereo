@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="?attr/back_secondary"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="48dp"
-    android:layout_width="match_parent"
-    >
+    android:layout_width="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_for_todo"
         android:background="?attr/back_secondary"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-<!--TODO: Решить багу с тем, что ripple effect не там, где надо-->
+        <!--TODO: Решить багу с тем, что ripple effect не там, где надо-->
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/done_todo_checkbox"
             android:layout_width="48dp"
             android:layout_height="0dp"
             android:buttonTint="@color/checkbox_filter_tint"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/todo_text"

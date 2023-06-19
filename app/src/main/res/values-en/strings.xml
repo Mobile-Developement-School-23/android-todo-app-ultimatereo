@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Do it All!</string>
+    <string name="myToDo">My tasks</string>
+    <string name="done">Done -&#160;</string>
+</resources>

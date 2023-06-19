@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">android-todo-app-ultimatereo</string>
     <string name="myToDo">Мои дела</string>
-    <string name="done">Выполнено - NaN</string>
+    <string name="done">Выполнено -&#160;</string>
 </resources>

@@ -23,9 +23,9 @@ class TodoItemHolder(val context: Context, itemView: View) : RecyclerView.ViewHo
         todoText.text = todoItem.text
         doneCheckBox.setOnCheckedChangeListener{ _, isChecked ->
             if (isChecked) {
-                check()
+                check(todoItem)
             } else {
-                uncheck()
+                uncheck(todoItem)
             }
         }
         if (firstTime) {
@@ -36,16 +36,18 @@ class TodoItemHolder(val context: Context, itemView: View) : RecyclerView.ViewHo
         }
     }
 
-    private fun check() {
+    private fun check(todoItem: TodoItem) {
         todoText.setTextColor(context.resolveColorAttr(R.attr.label_tertiary))
         todoText.paintFlags =
                 todoText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        todoItem.isDone = true
     }
 
-    private fun uncheck() {
+    private fun uncheck(todoItem: TodoItem) {
         todoText.setTextColor(context.resolveColorAttr(R.attr.label_primary))
         todoText.paintFlags =
                 todoText.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+        todoItem.isDone = false
     }
 
     @ColorInt

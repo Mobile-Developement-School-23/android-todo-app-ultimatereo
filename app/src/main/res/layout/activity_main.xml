@@ -25,17 +25,27 @@
 <!--TODO: Сделать плюсик, чтобы добавлять новые записи -->
 
     <TextView
-        android:id="@+id/done"
+        android:id="@+id/doneSample"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="6dp"
-        android:text= "@string/done"
+        android:text = "@string/done"
         android:textColor="?attr/label_tertiary"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <TextView
+        android:id="@+id/done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/label_tertiary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/doneSample"
+        app:layout_constraintTop_toTopOf="@+id/doneSample" />
 
     <ImageButton
         android:id="@+id/visibility"

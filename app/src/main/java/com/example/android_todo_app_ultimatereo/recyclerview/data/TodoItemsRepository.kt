@@ -8,8 +8,10 @@ class TodoItemsRepository {
         private val importancePriorities = TodoPriority.values()
     }
     private val todoItems : MutableList<TodoItem>
+    var countOfDone : Int
     init {
         todoItems = generateList()
+        countOfDone = todoItems.count { it.isDone }
     }
     fun getTodoItems() : List<TodoItem> {
         return todoItems

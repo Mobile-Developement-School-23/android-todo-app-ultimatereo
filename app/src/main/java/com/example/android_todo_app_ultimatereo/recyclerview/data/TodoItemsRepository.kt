@@ -9,7 +9,7 @@ class TodoItemsRepository {
     }
 
     private val todoItems: MutableList<TodoItem>
-    var countOfDone: Int
+    private var countOfDone: Int
 
     init {
         todoItems = generateList()

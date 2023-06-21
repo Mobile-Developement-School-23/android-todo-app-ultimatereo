@@ -13,7 +13,7 @@ import com.example.android_todo_app_ultimatereo.R
 import com.example.android_todo_app_ultimatereo.recyclerview.data.TodoItem
 import com.google.android.material.checkbox.MaterialCheckBox
 
-class TodoItemHolder(val context: Context, itemView: View) : RecyclerView.ViewHolder(itemView) {
+class TodoItemHolder(private val context: Context, itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val todoText: TextView = itemView.findViewById(R.id.todo_text)
     private val doneCheckBox: MaterialCheckBox = itemView.findViewById(R.id.done_todo_checkbox)
     private var firstTime = true

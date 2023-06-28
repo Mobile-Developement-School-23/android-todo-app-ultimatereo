@@ -22,10 +22,11 @@ class TodoItemsRepository {
 
     private fun generateList(): MutableList<TodoItem> {
         return buildList {
-            val numberOfItems = (10..30).random()
+            val numberOfItems = 30
             for (i in 0 until numberOfItems) {
                 val id = "TodoItem_$i"
-                val text: String = getRandomString((1..upperBoundaryLength).random())
+//                val text: String = getRandomString((1..upperBoundaryLength).random())
+                val text: String = id
                 val importance: TodoPriority = importancePriorities.random()
                 val isDone: Boolean = booleanArrayOf(true, false).random()
                 val deadline = Timestamp(System.currentTimeMillis() + (1..1000).random())

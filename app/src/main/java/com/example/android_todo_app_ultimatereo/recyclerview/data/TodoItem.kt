@@ -1,15 +1,16 @@
 package com.example.android_todo_app_ultimatereo.recyclerview.data
 
-import java.util.Date
+import androidx.room.Entity
 
+@Entity(tableName = "todoItems")
 data class TodoItem(
     val id: String,
     val text: String,
     val priority: TodoPriority?,
-    val deadline: Date?,
+    val deadline: Long?,
     var isDone: Boolean,
-    val timeOfCreation: Date,
-    val timeOfLastChange: Date?
+    val timeOfCreation: Long,
+    val timeOfLastChange: Long?
 )
 
 enum class TodoPriority {

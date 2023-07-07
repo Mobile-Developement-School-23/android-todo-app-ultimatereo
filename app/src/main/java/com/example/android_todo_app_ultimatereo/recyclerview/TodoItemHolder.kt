@@ -14,34 +14,33 @@ import com.example.android_todo_app_ultimatereo.recyclerview.data.TodoItem
 import com.google.android.material.checkbox.MaterialCheckBox
 
 class TodoItemHolder(private val context: Context, itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val todoText: TextView = itemView.findViewById(R.id.todo_text)
-    private val doneCheckBox: MaterialCheckBox = itemView.findViewById(R.id.done_todo_checkbox)
-    private var firstTime = true
+    val root : View = itemView
+    val todoText: TextView = itemView.findViewById(R.id.todo_text)
+    val doneCheckBox: MaterialCheckBox = itemView.findViewById(R.id.done_todo_checkbox)
     fun onBind(todoItem: TodoItem) {
         todoText.text = todoItem.text
-        doneCheckBox.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
+        if (todoItem.isDone) {
+            check(todoItem)
+        }
+        doneCheckBox.setOnCheckedChangeListener { _, _ ->
+            todoItem.isDone = !todoItem.isDone
+            if (todoItem.isDone) {
                 check(todoItem)
             } else {
                 uncheck(todoItem)
             }
         }
-        if (firstTime) {
-            if (todoItem.isDone) {
-                doneCheckBox.isChecked = todoItem.isDone
-            }
-            firstTime = false
-        }
+
     }
 
-    private fun check(todoItem: TodoItem) {
+    fun check(todoItem: TodoItem) {
         todoText.setTextColor(context.resolveColorAttr(R.attr.label_tertiary))
         todoText.paintFlags =
             todoText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         todoItem.isDone = true
     }
 
-    private fun uncheck(todoItem: TodoItem) {
+    fun uncheck(todoItem: TodoItem) {
         todoText.setTextColor(context.resolveColorAttr(R.attr.label_primary))
         todoText.paintFlags =
             todoText.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()

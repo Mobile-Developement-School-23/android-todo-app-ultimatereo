@@ -1,4 +1,4 @@
-package com.example.android_todo_app_ultimatereo.recyclerview.data
+package com.example.android_todo_app_ultimatereo.data
 
 import kotlinx.coroutines.flow.Flow
 import androidx.room.*

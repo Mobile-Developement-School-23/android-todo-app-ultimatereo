@@ -1,5 +1,6 @@
-package com.example.android_todo_app_ultimatereo.recyclerview.data
+package com.example.android_todo_app_ultimatereo.data
 
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -13,10 +14,12 @@ class TodoItemRepositoryImpl(private val todoDao: TodoDao) : TodoItemsRepository
     }
 
     init {
-        GlobalScope.launch(Dispatchers.IO) {
+        CoroutineScope(Dispatchers.IO).launch(Dispatchers.IO) {
             todoDao.deleteAll()
             todoDao.save(generateList())
         }
+        // TODO: Убрать GlobalScope
+        // Перебросить в ViewModel
     }
 
     private fun generateList(): MutableList<TodoItem> {

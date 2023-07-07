@@ -8,10 +8,8 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android_todo_app_ultimatereo.R
-import com.example.android_todo_app_ultimatereo.recyclerview.data.TodoDao
-import com.example.android_todo_app_ultimatereo.recyclerview.data.TodoItem
-import com.example.android_todo_app_ultimatereo.recyclerview.domain.CommonCallbackImpl
-
+import com.example.android_todo_app_ultimatereo.data.TodoDao
+import com.example.android_todo_app_ultimatereo.data.TodoItem
 class TodoAdapter(private val context: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

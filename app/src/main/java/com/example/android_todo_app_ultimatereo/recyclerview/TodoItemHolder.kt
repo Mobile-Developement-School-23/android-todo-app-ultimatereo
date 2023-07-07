@@ -10,7 +10,7 @@ import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android_todo_app_ultimatereo.R
-import com.example.android_todo_app_ultimatereo.recyclerview.data.TodoItem
+import com.example.android_todo_app_ultimatereo.data.TodoItem
 import com.google.android.material.checkbox.MaterialCheckBox
 
 class TodoItemHolder(private val context: Context, itemView: View) : RecyclerView.ViewHolder(itemView) {

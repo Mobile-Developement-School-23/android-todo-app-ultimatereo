@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.android_todo_app_ultimatereo.recyclerview.TodoAdapter
-import com.example.android_todo_app_ultimatereo.recyclerview.data.AppDatabase
-import com.example.android_todo_app_ultimatereo.recyclerview.data.TodoDao
-import com.example.android_todo_app_ultimatereo.recyclerview.data.TodoItemRepositoryImpl
+import com.example.android_todo_app_ultimatereo.data.AppDatabase
+import com.example.android_todo_app_ultimatereo.data.TodoDao
+import com.example.android_todo_app_ultimatereo.data.TodoItemRepositoryImpl
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.toList
 

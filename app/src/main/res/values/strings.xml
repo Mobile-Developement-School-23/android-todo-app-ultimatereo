@@ -2,4 +2,8 @@
     <string name="app_name">Сделай всё!</string>
     <string name="myToDo">Мои дела</string>
     <string name="done">Выполнено -&#160;</string>
+    <string name="whatTodo">Что надо сделать…</string>
+    <string name="importance">Важность</string>
+    <string name="deadline">Сделать до</string>
+    <string name="delete">Удалить</string>
 </resources>

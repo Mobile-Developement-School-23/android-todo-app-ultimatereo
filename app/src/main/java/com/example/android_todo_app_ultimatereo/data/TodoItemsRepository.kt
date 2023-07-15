@@ -3,7 +3,7 @@ package com.example.android_todo_app_ultimatereo.data
 import kotlinx.coroutines.flow.Flow
 
 interface TodoItemsRepository {
-
+    suspend fun start()
     suspend fun addItem(item: TodoItem)
 
     suspend fun deleteItemById(id: String)
@@ -16,5 +16,5 @@ interface TodoItemsRepository {
 
     suspend fun getItemById(id: String): TodoItem?
 
-    fun getTodoItemsFlow(): Flow<List<TodoItem>>
+    suspend fun getTodoItemsFlow(): Flow<List<TodoItem>>
 }

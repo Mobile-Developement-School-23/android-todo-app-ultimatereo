@@ -8,14 +8,28 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android_todo_app_ultimatereo.R
-import com.example.android_todo_app_ultimatereo.data.TodoDao
 import com.example.android_todo_app_ultimatereo.data.TodoItem
-class TodoAdapter(private val context: Context) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+class TodoAdapter(private val listener: Listener, private val context: Context) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
 
     private val differ: AsyncListDiffer<TodoItem> = AsyncListDiffer(this, DiffCallback())
     fun submitList(list: List<TodoItem>) = differ.submitList(list)
     fun currentList(): List<TodoItem> = differ.currentList
+
+    interface Listener {
+        fun onItemClicked(todoItem: TodoItem)
+        fun onItemChecked(todoItem: TodoItem)
+    }
+
+    override fun onClick(v: View) {
+        val itemPos = v.tag as Int
+        val todoItem = currentList()[itemPos]
+        when (v.id) {
+            R.id.done -> listener.onItemChecked(todoItem)
+            else -> listener.onItemClicked(todoItem)
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -24,7 +38,8 @@ class TodoAdapter(private val context: Context) :
             layoutInflater.inflate(
                 R.layout.todo_item,
                 parent,
-                false)
+                false
+            )
         )
         return vh
     }

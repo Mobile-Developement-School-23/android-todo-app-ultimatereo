@@ -2,4 +2,8 @@
     <string name="app_name">Do it All!</string>
     <string name="myToDo">My tasks</string>
     <string name="done">Done -&#160;</string>
+    <string name="whatTodo">What to do…</string>
+    <string name="importance">Importance</string>
+    <string name="deadline">Deadline</string>
+    <string name="delete">Delete</string>
 </resources>

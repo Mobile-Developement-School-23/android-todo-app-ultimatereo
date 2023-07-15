@@ -1,25 +1,19 @@
 package com.example.android_todo_app_ultimatereo.data
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-@OptIn(DelicateCoroutinesApi::class)
 class TodoItemRepositoryImpl(private val todoDao: TodoDao) : TodoItemsRepository {
     companion object {
         private val importancePriorities = TodoPriority.values()
     }
 
-    init {
-        CoroutineScope(Dispatchers.IO).launch(Dispatchers.IO) {
+    override suspend fun start() {
+        withContext(Dispatchers.IO) {
             todoDao.deleteAll()
             todoDao.save(generateList())
         }
-        // TODO: Убрать GlobalScope
-        // Перебросить в ViewModel
     }
 
     private fun generateList(): MutableList<TodoItem> {
@@ -48,11 +42,15 @@ class TodoItemRepositoryImpl(private val todoDao: TodoDao) : TodoItemsRepository
     }
 
     override suspend fun addItem(item: TodoItem) {
-        todoDao.save(item)
+        withContext(Dispatchers.IO) {
+            todoDao.save(item)
+        }
     }
 
     override suspend fun deleteItemById(id: String) {
-        todoDao.deleteById(id)
+        withContext(Dispatchers.IO) {
+            todoDao.deleteById(id)
+        }
     }
 
     override suspend fun updateItem(item: TodoItem) {
@@ -66,21 +64,29 @@ class TodoItemRepositoryImpl(private val todoDao: TodoDao) : TodoItemsRepository
     }
 
     override suspend fun getTodoItemsFlowWith(isChecked: Boolean): Flow<List<TodoItem>> {
-        if(isChecked) {
-            return todoDao.getAllFlowWithCheckedState(isChecked = false)
+        return withContext(Dispatchers.IO) {
+            if (isChecked) {
+                return@withContext todoDao.getAllFlowWithCheckedState(isChecked = false)
+            }
+            return@withContext todoDao.getAllFlow()
         }
-        return todoDao.getAllFlow()
     }
 
     override suspend fun getCountOfCompletedItems(): Int {
-        return todoDao.getCompletedCount()
+        return withContext(Dispatchers.IO) {
+            return@withContext todoDao.getCompletedCount()
+        }
     }
 
     override suspend fun getItemById(id: String): TodoItem? {
-        return todoDao.getById(id)
+        return withContext(Dispatchers.IO) {
+            return@withContext todoDao.getById(id)
+        }
     }
 
-    override fun getTodoItemsFlow(): Flow<List<TodoItem>> {
-        return todoDao.getAllFlow()
+    override suspend fun getTodoItemsFlow(): Flow<List<TodoItem>> {
+        return withContext(Dispatchers.IO) {
+            return@withContext todoDao.getAllFlow()
+        }
     }
 }

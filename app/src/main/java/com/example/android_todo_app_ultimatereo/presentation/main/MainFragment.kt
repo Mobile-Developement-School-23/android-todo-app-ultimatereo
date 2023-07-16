@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.android_todo_app_ultimatereo.R
 import com.example.android_todo_app_ultimatereo.data.TodoItem
 import com.example.android_todo_app_ultimatereo.recyclerview.TodoAdapter
@@ -25,12 +26,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private lateinit var doneTextView: TextView
     private lateinit var visibility: CheckBox
     private lateinit var add_item: FloatingActionButton
+    private lateinit var pull_to_refresh: SwipeRefreshLayout
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val root = requireView()
         todoRecyclerView = root.findViewById(R.id.todo_items)
         doneTextView = root.findViewById(R.id.done)
         visibility = root.findViewById(R.id.visibility)
         add_item = root.findViewById(R.id.add_item)
+        pull_to_refresh = root.findViewById(R.id.pull_to_refresh)
         initVisibleButton()
         initRecyclerView()
         floatingButtonInit()
@@ -47,14 +50,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         lifecycleScope.launch {
             vm.effect.collect {
                 when (it) {
-                    is MainViewModel.EffectUi.ToTaskFragmentUpdate -> {
+                    is MainViewModel.EffectUi.ToAddFragmentUpdate -> {
                         val action = MainFragmentDirections.actionMainFragmentToAddFragment(
                             it.todoItemId
                         )
                         findNavController().navigate(action)
                     }
 
-                    is MainViewModel.EffectUi.ToTaskFragmentCreate -> {
+                    is MainViewModel.EffectUi.ToAddFragmentCreate -> {
                         val action = MainFragmentDirections.actionMainFragmentToAddFragment()
                         findNavController().navigate(action)
                     }
@@ -72,6 +75,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun initRecyclerView() {
+        pull_to_refresh.setOnRefreshListener {
+            pull_to_refresh.isRefreshing = false
+        }
         todoAdapter = TodoAdapter(
             object : TodoAdapter.Listener {
                 override fun onItemClicked(todoItem: TodoItem) {
@@ -86,7 +92,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     )
                 }
             },
-            context = requireActivity().applicationContext
+            this
         )
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

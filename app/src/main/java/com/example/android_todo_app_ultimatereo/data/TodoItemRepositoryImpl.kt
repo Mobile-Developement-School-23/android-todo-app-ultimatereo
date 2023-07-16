@@ -60,7 +60,6 @@ class TodoItemRepositoryImpl(private val todoDao: TodoDao) : TodoItemsRepository
             val updatedItem = item.copy(timeOfCreation = System.currentTimeMillis())
             todoDao.update(updatedItem)
         }
-        return
     }
 
     override suspend fun getTodoItemsFlowWith(isChecked: Boolean): Flow<List<TodoItem>> {

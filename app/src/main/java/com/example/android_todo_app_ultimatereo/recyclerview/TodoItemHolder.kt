@@ -11,9 +11,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android_todo_app_ultimatereo.R
 import com.example.android_todo_app_ultimatereo.data.TodoItem
+import com.example.android_todo_app_ultimatereo.presentation.main.MainFragment
 import com.google.android.material.checkbox.MaterialCheckBox
 
-class TodoItemHolder(private val context: Context, itemView: View) : RecyclerView.ViewHolder(itemView) {
+class TodoItemHolder(private val fragment: MainFragment, itemView: View) :
+    RecyclerView.ViewHolder(itemView) {
     val root: View = itemView
     val todoText: TextView = itemView.findViewById(R.id.todo_text)
     val doneCheckBox: MaterialCheckBox = itemView.findViewById(R.id.done_todo_checkbox)
@@ -25,42 +27,37 @@ class TodoItemHolder(private val context: Context, itemView: View) : RecyclerVie
         val item = todoItem
         doneCheckBox.isChecked = item.isDone
         if (item.isDone) {
-            check(todoItem)
+            check()
         } else {
-            uncheck(todoItem)
+            uncheck()
         }
     }
 
-    fun check(todoItem: TodoItem) {
-//        todoText.setTextColor(context.resolveColorAttr(R.attr.label_tertiary))
-        todoText.setTextColor(
-            ContextCompat.getColor(context, R.color.label_dark_tertiary)
-        )
+    fun check() {
+        todoText.setTextColor(resolveColorAttr(R.attr.label_tertiary))
         todoText.paintFlags =
             todoText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
     }
 
-    fun uncheck(todoItem: TodoItem) {
-//        todoText.setTextColor(context.resolveColorAttr(R.attr.label_primary))
-        todoText.setTextColor(
-            ContextCompat.getColor(context, R.color.label_dark_primary)
-        )
+    fun uncheck() {
+        todoText.setTextColor(resolveColorAttr(R.attr.label_primary))
         todoText.paintFlags =
             todoText.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
     }
 
     @ColorInt
-    fun Context.resolveColorAttr(@AttrRes colorAttr: Int): Int {
-        val resolvedAttr = resolveThemeAttr(colorAttr)
+    fun resolveColorAttr(@AttrRes colorAttr: Int): Int {
+        val context = fragment.requireContext()
+        val resolvedAttr = resolveThemeAttr(colorAttr, context)
         // resourceId is used if it's a ColorStateList, and data if it's a color reference or a hex color
         val colorRes =
             if (resolvedAttr.resourceId != 0) resolvedAttr.resourceId else resolvedAttr.data
         return ContextCompat.getColor(context, colorRes)
     }
 
-    private fun Context.resolveThemeAttr(@AttrRes attrRes: Int): TypedValue {
+    private fun resolveThemeAttr(@AttrRes attrRes: Int, context: Context): TypedValue {
         val typedValue = TypedValue()
-        theme.resolveAttribute(attrRes, typedValue, true)
+        context.theme.resolveAttribute(attrRes, typedValue, true)
         return typedValue
     }
 }

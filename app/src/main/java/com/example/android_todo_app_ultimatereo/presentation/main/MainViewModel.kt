@@ -1,12 +1,11 @@
 package com.example.android_todo_app_ultimatereo.presentation.main
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
-import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.CreationExtras
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.android_todo_app_ultimatereo.App
 import com.example.android_todo_app_ultimatereo.data.TodoItem
 import com.example.android_todo_app_ultimatereo.data.TodoItemsRepository
@@ -22,7 +21,7 @@ import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class MainViewModel(repository: TodoItemsRepository, savedStateHandle: SavedStateHandle) :
+class MainViewModel(repository: TodoItemsRepository) :
     ViewModel() {
     sealed class EventUi {
         data class OnVisibleChange(val isFilterCompleted: Boolean) : EventUi()
@@ -32,8 +31,8 @@ class MainViewModel(repository: TodoItemsRepository, savedStateHandle: SavedStat
     }
 
     sealed class EffectUi {
-        data class ToTaskFragmentUpdate(val todoItemId: String) : EffectUi()
-        object ToTaskFragmentCreate : EffectUi()
+        data class ToAddFragmentUpdate(val todoItemId: String) : EffectUi()
+        object ToAddFragmentCreate : EffectUi()
     }
 
     data class UiState(
@@ -105,7 +104,7 @@ class MainViewModel(repository: TodoItemsRepository, savedStateHandle: SavedStat
 
                     is EventUi.OnItemSelected -> {
                         val itemId = event.todoItem.id
-                        setEffect { EffectUi.ToTaskFragmentUpdate(itemId) }
+                        setEffect { EffectUi.ToAddFragmentUpdate(itemId) }
                     }
 
                     is EventUi.OnItemCheckedChange -> {
@@ -115,7 +114,7 @@ class MainViewModel(repository: TodoItemsRepository, savedStateHandle: SavedStat
                     }
 
                     is EventUi.OnFloatingButtonClick -> {
-                        setEffect { EffectUi.ToTaskFragmentCreate }
+                        setEffect { EffectUi.ToAddFragmentCreate }
                     }
                 }
             }
@@ -123,22 +122,13 @@ class MainViewModel(repository: TodoItemsRepository, savedStateHandle: SavedStat
     }
 
     companion object {
-
-        val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(
-                modelClass: Class<T>,
-                extras: CreationExtras
-            ): T {
-                // Get the Application object from extras
-                val application = checkNotNull(extras[APPLICATION_KEY])
-                // Create a SavedStateHandle for this ViewModel from extras
-                val savedStateHandle = extras.createSavedStateHandle()
-
-                return MainViewModel(
-                    (application as App).repository,
-                    savedStateHandle
-                ) as T
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val repository =
+                    (this[APPLICATION_KEY] as App).repository
+                MainViewModel(
+                    repository = repository,
+                )
             }
         }
     }
